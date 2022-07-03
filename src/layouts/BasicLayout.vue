@@ -31,7 +31,7 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import SiderMenu from "./SiderMenu";
-import SettingDrawer from '../components/SettingDrawer'
+import SettingDrawer from '../components/SettingDrawer/index.vue'
 export default {
   data() {
     return {

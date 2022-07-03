@@ -38,4 +38,8 @@ router.afterEach((to,from,next)=>{
   Nprogress.done();
 })
 export default router;
+3.引入ant design的组件 如设置抽屉 里面的样式单选键盘 配置完后 点击需要同步在布局上
+然后通过抽屉与basiclayout通过属性的传递和事件通知的一个方式去改变主题，可以把配置建立在router
+信息的里面。存放在query里面 需要把值同步到router query里面就不适合用v-model
  -->
+ 
