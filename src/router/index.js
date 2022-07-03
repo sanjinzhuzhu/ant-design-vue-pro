@@ -1,9 +1,9 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Nprogress from 'nprogress'
-import 'nprogress/nprogress.css'
+import Nprogress from "nprogress";
+import "nprogress/nprogress.css";
 // import Home from "../views/Home.vue";
-import NotFound from "../views/User/404"
+import NotFound from "../views/User/404";
 // import RenderRouterView from './components/RenderRouterView'
 
 Vue.use(VueRouter);
@@ -160,11 +160,13 @@ const router = new VueRouter({
 //   base: process.env.BASE_URL,
 //   routes,
 // });
-router.beforeEach((to,from,next)=>{
-  Nprogress.start();
+router.beforeEach((to, from, next) => {
+  if (to.path !== from.path) {
+    Nprogress.start();
+  }
   next();
 });
-router.afterEach((to,from,next)=>{
+router.afterEach((to, from, next) => {
   Nprogress.done();
-})
+});
 export default router;
