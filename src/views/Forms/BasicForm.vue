@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <div>基础表单</div>
-    <router-view></router-view>
-  </div>
+  <div>基础表单</div>
 </template>
 
 <script>

@@ -1,6 +1,9 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import Nprogress from 'nprogress'
+import 'nprogress/nprogress.css'
+// import Home from "../views/Home.vue";
+import NotFound from "../views/User/404"
 // import RenderRouterView from './components/RenderRouterView'
 
 Vue.use(VueRouter);
@@ -22,7 +25,7 @@ Vue.use(VueRouter);
 //   },
 // ];
 
-export default new VueRouter({
+const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
@@ -132,14 +135,17 @@ export default new VueRouter({
     },
 
     {
-      path: "/",
-      name: "home",
-      component: Home,
+      // path: "/",
+      // name: "home",
+      // component: Home,
+      path: "*",
+      name: "404",
+      component: NotFound,
     },
-    {
-      path: "/about",
-      name: "about",
-    },
+    // {
+    //   path: "/about",
+    //   name: "about",
+    // },
   ],
 });
 
@@ -154,4 +160,11 @@ export default new VueRouter({
 //   base: process.env.BASE_URL,
 //   routes,
 // });
-// export default router;
+router.beforeEach((to,from,next)=>{
+  Nprogress.start();
+  next();
+});
+router.afterEach((to,from,next)=>{
+  Nprogress.done();
+})
+export default router;

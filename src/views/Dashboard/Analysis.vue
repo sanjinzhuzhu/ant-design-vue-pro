@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <div>分析页</div>
-    <router-view></router-view>
-  </div>
+  <div>分析页</div>
 </template>
 
 <script>

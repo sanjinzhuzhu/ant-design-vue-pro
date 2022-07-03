@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <div>Footer</div>
-    <router-view></router-view>
-  </div>
+  <div>Ant Design Pro ©2022 Created by zhuzhu</div>
 </template>
 
 <script>
