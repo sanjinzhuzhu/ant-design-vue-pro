@@ -5,7 +5,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import {Button,Layout,icon,Drawer,Radio} from 'ant-design-vue';//直接引入单独的样式{}
+import {Button,Layout,icon,Drawer,Radio,Menu} from 'ant-design-vue';//直接引入单独的样式{}
 import "ant-design-vue/dist/antd.less";//引入less样式可以自定义主题
 
 // 配置babel文件前"plugins": [
@@ -25,6 +25,7 @@ Vue.use(Layout);
 Vue.use(icon);
 Vue.use(Drawer);
 Vue.use(Radio);
+Vue.use(Menu);
 new Vue({
   router,
   store,

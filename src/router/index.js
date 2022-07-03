@@ -31,6 +31,7 @@ const router = new VueRouter({
   routes: [
     {
       path: "/user",
+      hideInMenu:true,
       component: () =>
         import(/*webpackChunkName:'layout'*/ "../layouts/UserLayout"),
       //component: {render: h=> h("router-view")},//这样写就不用在router下面新建文件，在填RenderRouterView到这里
@@ -66,11 +67,13 @@ const router = new VueRouter({
         {
           path: "dashboard",
           name: "dashboard",
+          meta: {icon:"dashboard",title:"仪表盘"},
           component: { render: (h) => h("router-view") },
           children: [
             {
               path: "/dashboard/analysis",
               name: "analysis",
+              meta:{title:"分析页"},
               component: () =>
                 import(
                   /* webpackChunkName: "dashboard" */ "../views/Dashboard/Analysis"
@@ -82,11 +85,13 @@ const router = new VueRouter({
         {
           path: "/form",
           name: "form",
+          meta: {icon:"form",title:"表单"},
           component: { render: (h) => h("router-view") },
           children: [
             {
               path: "/form/basic-form",
               name: "basicform",
+              meta:{title:"基础表单"},
               component: () =>
                 import(
                   /* webpackChunkName: "form" */ "../views/Forms/BasicForm"
@@ -94,6 +99,8 @@ const router = new VueRouter({
 
               path: "/form/step-form",
               name: "stepform",
+              hideChildrenMenu:true,
+              meta:{title:"分布表单"},
               component: () =>
                 import(
                   /* webpackChunkName: "form" */ "../views/Forms/StepForm"
@@ -140,6 +147,7 @@ const router = new VueRouter({
       // component: Home,
       path: "*",
       name: "404",
+      hideInMenu:true,
       component: NotFound,
     },
     // {
