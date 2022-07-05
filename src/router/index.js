@@ -67,7 +67,7 @@ const router = new VueRouter({
         {
           path: "dashboard",
           name: "dashboard",
-          meta: {icon:"dashboard",title:"仪表盘"},
+          meta: {icon:'dashboard',title:"仪表盘"},
           component: { render: (h) => h("router-view") },
           children: [
             {
@@ -85,7 +85,7 @@ const router = new VueRouter({
         {
           path: "/form",
           name: "form",
-          meta: {icon:"form",title:"表单"},
+          meta: {icon:'form',title:"表单"},
           component: { render: (h) => h("router-view") },
           children: [
             {
@@ -99,8 +99,8 @@ const router = new VueRouter({
 
               path: "/form/step-form",
               name: "stepform",
-              hideChildrenMenu:true,
-              meta:{title:"分布表单"},
+              hideChildrenInMenu:true,
+              meta:{title:"分步表单"},
               component: () =>
                 import(
                   /* webpackChunkName: "form" */ "../views/Forms/StepForm"
