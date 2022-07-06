@@ -50,4 +50,37 @@ export default router;
 1.完成菜单路由配置
 2.在根据制定路由配置的规范，去生成菜单的原始数据
  -->
+
+ <!-- 
+ 三、如何使用路由管理用户权限
+
+ 1、先建立一个utils(工具包文件）
+ a、写一个权限校验的函数，,权限是通过后台的权限返回给我们的，为了方便用一个假的数据
+ export function getCurrentAuthority() {
+  return【“admin”】 
+ }
+ b、在建立一个做校验的函数，就是我们需要的一个权限,获取到我们现在的权限，和我们需要的权限进行一个
+ 校验，如果用户的权限属于这个范围内，就返回一个true，没有通过就返回一个false
+  export function check(authority) {
+  const current = getCurrentAuthority();
+  return current.some(item => authority.includes(item));
+}
+ c.验证登录情况函数，如果说我获取到了当前的用户权限，而且用户权限不等于guest游客，那么就是登陆了
+  export function isLogin () {
+  const current = getCurrentAuthority();
+  return current && current[0] !== "guest";
+}
+
+四、如何去判断路由是否有权限，同样也是通过给路由配置meta信息，在路由守卫中进行判断，
+ 安装npm i lodash 来监控  Lodash是一个著名的javascript原生库，不需要引入其他第三方依赖。
+ 是一个意在提高开发者效率,提高JS原生方法性能的JS库。
+
+ _.findLast是从右至左遍历collection （集合）元素的。
+ 如 
+ _.findLast([1, 2, 3, 4], function(n) {
+  return n % 2 == 1;
+});
+// => 3
+
+  -->
  
