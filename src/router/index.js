@@ -36,10 +36,7 @@ const router = new VueRouter({
         import(/*webpackChunkName:'layout'*/ "../layouts/UserLayout"),
       //component: {render: h=> h("router-view")},//这样写就不用在router下面新建文件，在填RenderRouterView到这里
       children: [
-        {
-          path: "/user",
-          redirect: "/user/login",
-        },
+       
         {
           path: "/user/login",
           name: "login",
@@ -51,6 +48,10 @@ const router = new VueRouter({
           name: "register",
           component: () =>
             import(/*webpackChunkName:'user'*/ "../views/User/Register"),
+        },
+        {
+          path: "/user",
+          redirect: "/user/login",
         },
       ],
     },
@@ -179,3 +180,11 @@ router.afterEach((to, from, next) => {
   Nprogress.done();
 });
 export default router;
+// const originalPush = VueRouter.prototype.push
+
+// VueRouter.prototype.push = function push(location) {
+
+//   return originalPush.call(this, location).catch(err => err)
+
+// }
+
