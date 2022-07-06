@@ -1,9 +1,13 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import findLast from "lodash/findLast";
+import { notification } from "ant-design-vue";
 import Nprogress from "nprogress";
 import "nprogress/nprogress.css";
 // import Home from "../views/Home.vue";
 import NotFound from "../views/User/404";
+import Forbidden from "../views/User/403";
+import { check, isLogin } from "../utils/auth";
 // import RenderRouterView from './components/RenderRouterView'
 
 Vue.use(VueRouter);
@@ -36,7 +40,6 @@ const router = new VueRouter({
         import(/*webpackChunkName:'layout'*/ "../layouts/UserLayout"),
       //component: {render: h=> h("router-view")},//这样写就不用在router下面新建文件，在填RenderRouterView到这里
       children: [
-       
         {
           path: "/user/login",
           name: "login",
@@ -57,6 +60,7 @@ const router = new VueRouter({
     },
     {
       path: "/",
+      meta: { authority: ["admin"] },
       component: () =>
         import(/* webpackChunkName: "layout" */ "../layouts/BasicLayout"),
       children: [
@@ -86,7 +90,7 @@ const router = new VueRouter({
         {
           path: "/form",
           name: "form",
-          meta: { icon: "form", title: "表单" },
+          meta: { icon: "form", title: "表单", authority: ["admin"] },
           component: { render: (h) => h("router-view") },
           children: [
             {
@@ -144,9 +148,15 @@ const router = new VueRouter({
     },
 
     {
-      // path: "/",
-      // name: "home",
-      // component: Home,
+      path: "/403",
+      name: "403",
+      hideInMenu: true,
+      component: Forbidden,
+    },
+    // path: "/",
+    // name: "home",
+    // component: Home,
+    {
       path: "*",
       name: "404",
       hideInMenu: true,
@@ -174,9 +184,31 @@ router.beforeEach((to, from, next) => {
   if (to.path !== from.path) {
     Nprogress.start();
   }
+  // 去我们即将要做的路由，matched是路由提供的一个接口，可以从这个字段里取到，
+  // 我们当前访问到的路由匹配到的所有的路由信息，如果找到了就去成熟的权限去校验，如果没有权限的话
+  // 就直接跳转到我们的登陆信息或者是403，在进行进一步是否已经登陆的判断，如果没有登陆就跳转到登陆页，在加一个判断，防止
+  // 栈溢出，如果已经登陆了就直接掉403，在配置一个403的路由
+  const record = findLast(to.matched, (record) => record.meta.authority);
+  if (record && !check(record.meta.authority)) {
+    if (!isLogin() && to.path !== "/user/login") {
+      next({
+        path: "/user/login",
+      });
+    } else if (to.path !== "/403") {
+      notification.error({
+        message: "403",
+        description: "你没有权限访问，请联系管理员咨询。",
+      });
+      next({
+        path: "/403",
+      });
+    }
+    Nprogress.done();
+  }
   next();
 });
-router.afterEach((to, from, next) => {
+
+router.afterEach(() => {
   Nprogress.done();
 });
 export default router;
@@ -187,4 +219,3 @@ export default router;
 //   return originalPush.call(this, location).catch(err => err)
 
 // }
-

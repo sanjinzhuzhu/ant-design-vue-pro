@@ -41,7 +41,7 @@
 //   props: ['menuInfo'],
 // };
 import SubMenu from "../layouts/SubMenu.vue";
-
+import { check } from "../utils/auth";
 export default {
   props: {
     theme: {
@@ -85,7 +85,10 @@ export default {
     },
     getMenuData(routers = [], parentKeys = [], selectedKey) {
       const menuData = [];
-      routers.forEach((item) => {
+      for (let item of routers) {
+        if (item.meta && item.meta.authority && !check(item.meta.authority)) {
+          break;
+        }
         if (item.name && !item.hideInMenu) {
           this.openKeysMap[item.path] = parentKeys;
           this.selectedKeysMap[item.path] = [selectedKey || item.path];
@@ -113,7 +116,7 @@ export default {
             ...this.getMenuData(item.children, [...parentKeys, item.path])
           );
         }
-      });
+      }
 
       return menuData;
     },
