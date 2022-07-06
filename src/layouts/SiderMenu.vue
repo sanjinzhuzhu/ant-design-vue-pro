@@ -71,7 +71,7 @@ export default {
   data() {
     this.selectedKeysMap = {};
     this.openKeysMap = {};
-    const menuData = this.getMenuData(this.$router.options.routes);//通过这个this.$router.options.routes可以拿到路由里的配置
+    const menuData = this.getMenuData(this.$router.options.routes); //通过这个this.$router.options.routes可以拿到路由里的配置
     return {
       collapsed: false,
       menuData,
