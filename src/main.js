@@ -8,6 +8,7 @@ import store from "./store";
 import {Button,Layout,icon,Drawer,Radio,Menu} from 'ant-design-vue';//直接引入单独的样式{}
 import "ant-design-vue/dist/antd.less";//引入less样式可以自定义主题
 import Authorized from './components/Authorized';
+import Auth from './directives/auth'
 
 // 配置babel文件前"plugins": [
 //   ["import", { "libraryName": "ant-design-vue", "libraryDirectory": "es", "style": "true" }] // `style: true` 会加载 less 文件
@@ -28,6 +29,7 @@ Vue.use(Drawer);
 Vue.use(Radio);
 Vue.use(Menu);
 Vue.component("Authorized",Authorized);
+Vue.use(Auth);
 new Vue({
   router,
   store,
