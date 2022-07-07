@@ -71,7 +71,7 @@ export default router;
   return current && current[0] !== "guest";
 }
 
-四、如何去判断路由是否有权限，同样也是通过给路由配置meta信息，在路由守卫中进行判断，
+四、路由式权限控制，如何去判断路由是否有权限，同样也是通过给路由配置meta信息，在路由守卫中进行判断，
  安装npm i lodash 来监控  Lodash是一个著名的javascript原生库，不需要引入其他第三方依赖。
  是一个意在提高开发者效率,提高JS原生方法性能的JS库。
 
@@ -81,6 +81,22 @@ export default router;
   return n % 2 == 1;
 });
 // => 3
-
   -->
+
+  <!-- 
+  五、更加精细化的权限设置（权限组件，权限指令
+  1.组件式的权限控制，
+  a、首先在components下新建立一个组件，Authorized.vue，这个组件仅仅是权限控制的一部分
+  所以可以用函数式组件来提高我们的渲染性能的，函数时组件使用template的话会有些限制，需要一个check的函数
+  校验我们的权限。
+  b、函数式组件里面是没有this的，那如何把这个check给到template中使用呢？这一块就不是很方便了，
+  在template中，不能把slot作为根元素的，如果想直接加载slot，要提供一个其他的标签，这样就会破坏原有的HTML结
+  构，这样不是很友好的，会破坏我们的样式，基于这个问题就不使用template，就直接写render,它提供两个参数，第一个是create element，第二个是context，这时候可以去context里面取出props，和scopedSlots ,和Slot可以挂载到scopedSlots 下面，不用区分是作用域插槽和具名插槽，
+  c、在直接返回一个check通过传递过来的authrized，如果校验通过就返回插槽，就是传递过来的子组件，如果没有校验通过的话就返回null，在到props里去声明，权限的对象里的属性和值，
+  d、配置完成，但是在权限校验的时候会经常使用的，每次都要import进来就不是很方便，那么可以注册为全局组件
+  2.将权限设置注册为全局组件，依然是在main.js里注册，注册方式就不是vue.use了，之所以之前的使用vue.use是因为已经做过一些处理，vue全局注册的方式，就是最开始vue讲到的 vue.component("Authorized",Authorized),注册完就可以在组件中使用了，
+  3.测试。测试抽屉权限，只有管理员可以设置
+  
+  
+   -->
  

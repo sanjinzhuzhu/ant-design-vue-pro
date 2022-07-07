@@ -60,7 +60,7 @@ const router = new VueRouter({
     },
     {
       path: "/",
-      meta: { authority: ["admin"] },
+      meta: { authority: ["admin","user"] },
       component: () =>
         import(/* webpackChunkName: "layout" */ "../layouts/BasicLayout"),
       children: [
