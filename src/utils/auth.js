@@ -1,6 +1,6 @@
 export function getCurrentAuthority() {
   // return ["admin"]
-  return ["user"]
+  return ["admin"]
 }
 
 export function check(authority) {
