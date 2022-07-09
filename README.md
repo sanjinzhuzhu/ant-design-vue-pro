@@ -114,4 +114,24 @@ export default router;
 
    b、ref的一个使用：ref 被用来给元素或子组件注册引用信息。引用信息将会注册在父组件的 $refs 对象上。如果在普通的 DOM 元素上使用，引用指向的就是 DOM 元素；如果用在子组件上，引用就指向组件实例：
     -->
- 
+  <!-- 
+  七、高效的使用Mock数据进行开发
+  a、首先 npm i axios，在到src里建立mock文件夹-dashbo_chart.js,在拿到方法 拿到值，值时自己定义的
+  b、那router.js中就不能用import default的形式了，因为mock的文件时需要在node的环境下运行的，所以需要common js 的一个规范，模块化比较流行的有 common js ，cmd， amd ，和es6的模块化规范
+  c、mock文件写好后，要做的就是接口请求过来之后，我们要我们这个接口，把它代理到mock文件中。
+  d、更改配置，就是我们的vue-cli它提供的一个config js，我们是可以更改我们webpack的一些配置的，在前面章节中css也是定义了一个less的webpack的配置，我们现在前端在页面上跑起来的画url实际上webpack给我们提供了一个服务的，这个是devServer，可以去vue-cil里面也有devServer最简单的一个更改的一个配置，如果这个不能满足我们的需求，我们还可以去看webpack的一个文档https://webpack.docschina.org/configuration/dev-server/#devserver-proxy,里面会有一些更加复炸的事例，现在要的就是devServer，然后proxy 代理的我们api这样一个接口的时候，通过bypass去做一些mock数据的一些拦截 代理的操作,复制这段代码，devServer: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        bypass: function (req, res, proxyOptions) {
+          if (req.headers.accept.indexOf('html') !== -1) {
+            console.log('Skipping proxy for browser request.');
+            return '/index.html';
+          }
+        },
+      },
+    },
+  },到vue.config文件中。
+  f、当是我们api请求的时候，我们是可以拿到url的一个pass的链接的，按照约定的规范，就是api截断之后，把后面的dashboard chart阻断成我们的一个文件名称。name就是我们需要mock下面的文件名称了,在把mock文件require进去
+  g、mock方案完成后，还存在一个问题 当require进来之后 这个模块被缓存掉了，也就是说require完之后在去更改mock数据，是不生效的，当每次结果过来时，想要改动，想要生效，必须要清除缓存
+   -->
