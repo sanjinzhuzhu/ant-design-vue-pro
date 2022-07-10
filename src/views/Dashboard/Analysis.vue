@@ -5,7 +5,8 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
+import request from "../../utils/request";
 import Chart from "../../components/Chart";
 // import { response } from "express";
 export default {
@@ -17,14 +18,17 @@ export default {
 
   mounted() {
     this.getChartData();
-    this.interval = setInterval(() => {
+    // this.interval = setInterval(() => {
       this.getChartData();
-    }, 3000);
+    // }, 3000);
   },
   methods: {
     getChartData() {
-      axios
-        .get("/api/dashboard/chart", { params: { ID: 12345 } })
+      request({
+        url:"/api/dashboard/chart1",
+        methods: "get",
+        params:{ ID: 12345 } 
+      })
         .then(response => {
           this.chartOption = {
             title: {

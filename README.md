@@ -134,4 +134,14 @@ export default router;
   },到vue.config文件中。
   f、当是我们api请求的时候，我们是可以拿到url的一个pass的链接的，按照约定的规范，就是api截断之后，把后面的dashboard chart阻断成我们的一个文件名称。name就是我们需要mock下面的文件名称了,在把mock文件require进去
   g、mock方案完成后，还存在一个问题 当require进来之后 这个模块被缓存掉了，也就是说require完之后在去更改mock数据，是不生效的，当每次结果过来时，想要改动，想要生效，必须要清除缓存
+  重点：一个是用cil去定制webpack，尤其是定制的webpack的devServer，来集成我们mock的数据方案，进一步提升我们的开发效率
    -->
+
+   <!-- 
+   八、开发完后需要与后端进行联调，需要一个比较简单的方式能够快递的切换mock环境和联调环境，可以添加环境变量去区分这个环境
+   首先环境变量可以在package.js里面新增一个命令, "serve:no-mock": "Mock=none vue-cli-service serve",这个就只能在Linux mac下使用，如果需要在window下使用，需要在添加一个包 npm i cross-env 在把cross-env添加到命令里，这样mac和window就都没有问题了，
+   还需要更改一下vue.config 需要在判断一下,由于更改了config我们需要重启一下环境
+  一般情况不会直接使用axios这个库去法请求，会在去做一些二次封装，做一些错误的统一的处理，可以在捕捉错误的函数后面街上一个promise.reject，这么做的好处就是请求的时候在正确的回调里面 如果说return了一个promise.reject，就不会进入then的回调里面去了，这样的话去处理数据的时候就不用特别去考虑有没有值或者是data和不合理，如果想去进一步catch处理错误信息也是可以的，一般情况下，在这里做一个提醒就可以了，
+  然后在把analysis里面的借口去更改为刚刚写的request.js文件，因为现在每次都需要引入，所以我们可以把这个挂载到main.js原型里，然后我们就可以通过this.$request的形式直接去访问也是可以的，如果想要给404和文字给一些样式信息，我们可以使用render函数，但是render函数比较繁琐，我们还可以使用jsx，首先将jsx配置到我们项目中，具体如下
+  a，查看vue.js中支持jsx的babel插件，网站https://github.com/vuejs/jsx-vue2，安装npm install @vue/babel-preset-jsx @vue/babel-helper-vue-jsx-merge-props，在到babel中配置'@vue/babel-preset-jsx',载重启服务器，重启完后就可以对message去做一个定制化的东西，我们可以使用一个方法来返回一个vnode，这个方法的第一个参数就是create Element
+    -->
