@@ -25,7 +25,7 @@ export default {
   methods: {
     getChartData() {
       request({
-        url:"/api/dashboard/chart1",
+        url:"/api/dashboard/chart",
         methods: "get",
         params:{ ID: 12345 } 
       })
