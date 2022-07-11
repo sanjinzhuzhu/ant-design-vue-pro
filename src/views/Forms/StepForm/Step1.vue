@@ -7,7 +7,7 @@
         :wrapper-col="formItemLayout.wrapperCol"
       >
         <a-input
-          getFieldDecorator="[
+          v-decorator="[
             'payAccount',
             {
               initialValue: step.payAccount,

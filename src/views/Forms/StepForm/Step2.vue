@@ -8,18 +8,19 @@
       >
         {{ step.payAccount }}
       </a-form-item>
+
       <a-form-item
         label="密码"
         :label-col="formItemLayout.labelCol"
         :wrapper-col="formItemLayout.wrapperCol"
       >
         <a-input
-          getFieldDecorator="[
+          v-decorator="[
             'password',
             {
               initialValue: step.payAccount,
               rules: [{ required: true, message: '请输入密码' }],
-            },
+            }
           ]"
           type="password"
           placeholder="请输入付款密码"
