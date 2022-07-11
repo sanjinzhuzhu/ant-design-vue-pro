@@ -125,11 +125,11 @@ const router = new VueRouter({
                     ),
                 },
                 {
-                  path: "/form/step-form/comfirm",
+                  path: "/form/step-form/confirm",
                   name: "comfirm",
                   component: () =>
                     import(
-                      /* webpackChunkName: "form" */ "../views/Forms/StepForm/Step2"
+                      /* webpackChunkName: "Step2" */ "../views/Forms/StepForm/Step2"
                     ),
                 },
                 {

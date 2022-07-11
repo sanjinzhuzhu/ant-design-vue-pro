@@ -4,7 +4,7 @@ import Vue from "vue";
 
 import App from "./App.vue";
 import router from "./router";
-import store from "./store";
+import store from "./store/index";
 import {Button,Layout,icon,Drawer,Radio,Menu,Form,Input} from 'ant-design-vue';//直接引入单独的样式{}
 import "ant-design-vue/dist/antd.less";//引入less样式可以自定义主题
 import Authorized from './components/Authorized';
