@@ -53,7 +53,7 @@
 
 <script>
 // import ReceiveAccount from "../../../components/ReceiveAccount";
-//@表示直接到arc这个路径可以使用@来替代
+//@表示直接到src这个路径可以使用@来替代
 import ReceiveAccount from "@/components/ReceiveAccount";
 export default {
   components: { ReceiveAccount },

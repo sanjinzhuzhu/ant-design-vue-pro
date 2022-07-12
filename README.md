@@ -159,7 +159,23 @@ export default router;
 },
 初始值和defaultValue是一样的性质，也只在组件实例化的时候生效一次。
    -->
+<!-- 
+九、打包一个自动校验的表单 input下拉框举例
+1.ant D规范自定义表单控件
+自定义或第三方的表单控件，也可以与 Form 组件一起使用。只要该组件遵循以下的约定：
+提供受控属性 value 或其它与 valuePropName-参数) 的值同名的属性。
+提供 onChange 事件或 trigger-参数) 的值同名的事件。
+不能是函数式组件。
+2.复制组件中有新的元素记得注册使用，如select
+3.校验逻辑卸载rule里，在引入receiveAccount组件
+4.有初始变量记得去vuex（store）里去补充上
+ -->
+ <!-- 
+ 十、如何管理系统中使用的图标
 
+ 推荐网址 https：//www.iconfont.cn
+ vue inspect > output.js 可以导出内部的配置文件。
+  -->
 
     
     

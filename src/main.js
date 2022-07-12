@@ -5,10 +5,20 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store/index";
-import {Button,Layout,icon,Drawer,Radio,Menu,Form,Input,Select} from 'ant-design-vue';//直接引入单独的样式{}
-import "ant-design-vue/dist/antd.less";//引入less样式可以自定义主题
-import Authorized from './components/Authorized';
-import Auth from './directives/auth'
+import {
+  Button,
+  Layout,
+  icon,
+  Drawer,
+  Radio,
+  Menu,
+  Form,
+  Input,
+  Select,
+} from "ant-design-vue"; //直接引入单独的样式{}
+import "ant-design-vue/dist/antd.less"; //引入less样式可以自定义主题
+import Authorized from "./components/Authorized";
+import Auth from "./directives/auth";
 
 // 配置babel文件前"plugins": [
 //   ["import", { "libraryName": "ant-design-vue", "libraryDirectory": "es", "style": "true" }] // `style: true` 会加载 less 文件
@@ -18,7 +28,6 @@ import Auth from './directives/auth'
 
 // 配置之后 可以完成按需加载
 // import { Button } from "ant-design-vue";
-
 
 // Vue.config.productionTip = false;
 // Vue.use(Antd);//直接引入这个包内存大，可以就用button
@@ -31,12 +40,15 @@ Vue.use(Menu);
 Vue.use(Form);
 Vue.use(Input);
 Vue.use(Select);
-Vue.component("Authorized",Authorized);
+Vue.component("Authorized", Authorized);
 Vue.use(Auth);
+
+// const IconFont = Icon.createFromIconfontCN({
+//   scriptUrl: " ", // 在 iconfont.cn 上生成
+// });
+// Vue.component("IconFont", IconFont);
 new Vue({
   router,
   store,
   render: (h) => h(App),
 }).$mount("#app");
-
-

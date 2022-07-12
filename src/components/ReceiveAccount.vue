@@ -1,5 +1,6 @@
 <template>
   <a-input-group compact>
+    <!-- 载模版中使用change事件 -->
     <a-select v-model="type" style="width: 130px" @change="handleTypeChange">
       <a-select-option value="alipay"> 支付宝 </a-select-option>
       <a-select-option value="bank"> 银行账户 </a-select-option>
@@ -20,7 +21,7 @@ export default {
     },
   },
   watch: {
-    vslue(val) {
+    value(val) {
       Object.assign(this.val);
     },
   },
