@@ -14,7 +14,34 @@
               rules: [{ required: true, message: '请输入付款账号' }],
             },
           ]"
-          placeholder="请输入付款账户"
+        />
+      </a-form-item>
+      <a-form-item
+        label="收款账户"
+        :label-col="formItemLayout.labelCol"
+        :wrapper-col="formItemLayout.wrapperCol"
+      >
+        <ReceiveAccount
+          v-decorator="[
+            'receiveAccount',
+            {
+              initialValue: step.receiveAccount,
+              rules: [
+                {
+                  required: true,
+                  message: '请输入收款账号',
+                  validator: (rule, value, callback) => {
+                    if (value && value.number) {
+                      callback();
+                    } else {
+                      callback(false);
+                    }
+                  },
+                },
+              ],
+            },
+          ]"
+          placeholder="请输入收款账户"
         />
       </a-form-item>
       <a-form-item>
@@ -25,13 +52,17 @@
 </template>
 
 <script>
+// import ReceiveAccount from "../../../components/ReceiveAccount";
+//@表示直接到arc这个路径可以使用@来替代
+import ReceiveAccount from "@/components/ReceiveAccount";
 export default {
+  components: { ReceiveAccount },
   data() {
     this.form = this.$form.createForm(this);
     return {
       formItemLayout: {
         labelCol: { span: 4 },
-        wrapperCol: { span: 14 }
+        wrapperCol: { span: 14 },
       },
     };
   },
@@ -47,9 +78,9 @@ export default {
         if (!err) {
           $store.commit({
             type: "form/saveStepFormData",
-            payload: values
+            payload: values,
           });
-          $router.push('/form/step-form/confirm')
+          $router.push("/form/step-form/confirm");
         }
       });
     },

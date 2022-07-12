@@ -4,6 +4,10 @@ import request from "../../utils/request";
 const state = {
   step: {
     payAccout: "123456",
+    receiveAccount: {
+      type: 'alipay',
+      number:""
+    }
   },
 };
 
